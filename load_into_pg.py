@@ -434,11 +434,6 @@ elif args.so_project:
             )
             exit(1)
 
-    try:
-        libarchive.extract_file(filepath)
-    except Exception as e:
-        six.print_("Error: impossible to extract the {0} archive ({1})".format(url, e))
-        exit(1)
 
     tables = [
         "Tags",
@@ -453,7 +448,7 @@ elif args.so_project:
 
     for table in tables:
         six.print_("Load {0}.xml file".format(table))
-        handleTable(table, args.insert_json, args.foreign_keys, None, dbConnectionParam)
+        handleTable(table, args.insert_json, args.foreign_keys, "./Posts.xml", dbConnectionParam)
         # remove file
         os.remove(table + ".xml")
 
